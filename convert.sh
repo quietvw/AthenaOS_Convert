@@ -40,7 +40,7 @@ fi
 
 # Install LXDE with no recommended packages
 echo "Installing LXDE (minimal)..."
-apt install --no-install-recommends lxde -y
+apt install --no-install-recommends lxde sudo git -y
 apt install xinit xserver-xorg plymouth -y 
 
 # Enable autologin for athenaos
@@ -73,5 +73,5 @@ chmod +x /home/athenaos/startup.sh
 chown -R athenaos:athenaos /home/athenaos/startup.sh
 
 mv /usr/bin/lxpanel /usr/bin/lxpanel_no
-
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
