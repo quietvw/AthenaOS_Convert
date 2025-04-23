@@ -83,6 +83,8 @@ cp -rf startup.sh /home/athenaos/startup.sh
 chmod +x /home/athenaos/startup.sh
 chown -R athenaos:athenaos /home/athenaos/startup.sh
 
+cp -rf wallpaper.png /home/athenaos/wallpaper.png
+chown -R athenaos:athenaos /home/athenaos/wallpaper.png
 
 mv /usr/bin/lxpanel /usr/bin/lxpanel_no
 cd /home/athenaos/ && git clone https://github.com/quietvw/AthenaOS_UI
