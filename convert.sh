@@ -93,6 +93,7 @@ chown -R athenaos:athenaos /home/athenaos/motd.sh
 
 mv /usr/bin/lxpanel /usr/bin/lxpanel_no
 cd /home/athenaos/ && git clone https://github.com/quietvw/AthenaOS_UI
+chown -R athenaos:athenaos /home/athenaos/AthenaOS_UI
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
 reboot
