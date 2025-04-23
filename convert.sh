@@ -41,7 +41,7 @@ fi
 # Install LXDE with no recommended packages
 echo "Installing LXDE (minimal)..."
 apt install --no-install-recommends lxde -y
-apt install xinit xserver-xorg -y 
+apt install xinit xserver-xorg plymouth -y 
 
 # Enable autologin for athenaos
 echo "Setting up autologin for 'athenaos'..."
@@ -61,17 +61,17 @@ chown athenaos:athenaos /home/athenaos/.bash_profile
 systemctl disable lightdm
 
 echo "Setting up Autoconfig"
+mkdir /home/athenaos/.config/
 mkdir /home/athenaos/.config/autostart/
 echo "[Desktop Entry]
 Type=Application
 Name=AthenaOS
 Exec=/home/athenaos/startup.sh" > /home/athenaos/.config/autostart/athenaos.desktop
-chown -R athenaos:athenaos /home/athenaos/.config/autostart/
+chown -R athenaos:athenaos /home/athenaos/.config/
 cp -rf startup.sh /home/athenaos/startup.sh
 chmod +x /home/athenaos/startup.sh
 chown -R athenaos:athenaos /home/athenaos/startup.sh
+
 mv /usr/bin/lxpanel /usr/bin/lxpanel_no
-mv wallpaper.png /home/athenaos/wallpaper.png
-chown -R athenaos:athenaos /home/athenaos/wallpaper.png
 
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
