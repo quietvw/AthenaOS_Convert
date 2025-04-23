@@ -1,6 +1,6 @@
 #!/bin/bash
 sleep 5
-RES="800 400 60"
+RES="960 640 60"
 DISP=$(xrandr | grep " connected" | awk '{print $1}')
 MODELINE=$(cvt $RES | grep -oP 'Modeline \K.*')
 MODERES=$(echo $MODELINE | cut -d' ' -f1)
