@@ -9,3 +9,4 @@ xrandr --newmode $MODELINE && \
 xrandr --addmode $DISP $MODERES && \
 xrandr --output $DISP --mode $MODERES
 
+pcmanfm --set-wallpaper="/home/athenaos/wallpaper.png"
