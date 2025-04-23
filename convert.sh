@@ -67,6 +67,7 @@ EOF
 # Set LXDE to start automatically
 echo "Setting LXDE to start for 'athenaos'..."
 sudo -u athenaos bash -c 'echo "[[ -z \$DISPLAY && \$XDG_VTNR -eq 1 ]] && exec startx" >> ~/.bash_profile'
+sudo -u athenaos bash -c 'bash /home/athenaos/motd.sh" >> ~/.bashrc'
 sudo -u athenaos bash -c 'pip3 install fastapi flaskwebgui uvicorn  --break-system-packages'
 chown athenaos:athenaos /home/athenaos/.bash_profile
 systemctl disable lightdm
@@ -85,6 +86,10 @@ chown -R athenaos:athenaos /home/athenaos/startup.sh
 
 cp -rf wallpaper.png /home/athenaos/wallpaper.png
 chown -R athenaos:athenaos /home/athenaos/wallpaper.png
+
+cp -rf motd.sh /home/athenaos/motd.sh
+chmod +x /home/athenaos/motd.sh
+chown -R athenaos:athenaos /home/athenaos/motd.sh
 
 mv /usr/bin/lxpanel /usr/bin/lxpanel_no
 cd /home/athenaos/ && git clone https://github.com/quietvw/AthenaOS_UI
