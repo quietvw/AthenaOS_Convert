@@ -42,6 +42,7 @@ fi
 echo "Installing LXDE (minimal)..."
 apt install --no-install-recommends lxde sudo git -y
 apt install xinit xserver-xorg plymouth -y 
+apt install python3-venv python3-pip -y
 
 # Enable autologin for athenaos
 echo "Setting up autologin for 'athenaos'..."
