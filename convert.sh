@@ -56,10 +56,20 @@ EOF
 
 # Set LXDE to start automatically
 echo "Setting LXDE to start for 'athenaos'..."
-sudo -u athenaos bash -c 'echo "startlxde" > ~/.xsession'
-chown athenaos:athenaos /home/athenaos/.xsession
-sudo -u athenaos bash -c 'echo "[[ -z \$DISPLAY && \$XDG_VTNR -eq 1 ]] && exec startlxde" >> ~/.bash_profile'
+sudo -u athenaos bash -c 'echo "[[ -z \$DISPLAY && \$XDG_VTNR -eq 1 ]] && exec startx" >> ~/.bash_profile'
 chown athenaos:athenaos /home/athenaos/.bash_profile
 systemctl disable lightdm
+
+echo "Setting up Autoconfig"
+mkdir /home/athenaos/.config/autostart/
+echo "[Desktop Entry]
+Type=Application
+Name=AthenaOS
+Exec=/home/athenaos/startup.sh" > /home/athenaos/.config/autostart/athenaos.desktop
+chown -R athenaos:athenaos /home/athenaos/.config/autostart/
+cp -rf startup.sh /home/athenaos/startup.sh
+chmod +x /home/athenaos/startup.sh
+chown -R athenaos:athenaos /home/athenaos/startup.sh
+
 
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
