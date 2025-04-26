@@ -11,5 +11,5 @@ xrandr --output $DISP --mode $MODERES
 
 pcmanfm --set-wallpaper="/home/athenaos/wallpaper.png"
 
-cd /home/athenaos/AthenaOS_UI && BROWSER=firefox python3 main.py &
+cd /home/athenaos/AthenaOS_UI && python3 main.py &
 firefox --kiosk http://127.0.0.1:15500
