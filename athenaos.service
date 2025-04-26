@@ -1,0 +1,12 @@
+[Unit]
+Description=AthenaOS
+
+[Service]
+Type=simple
+User=root
+ExecStart=python3 /home/athenaos/AthenaOS_UI/main.py
+Restart=on-failure
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target
