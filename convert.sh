@@ -68,8 +68,7 @@ EOF
 echo "Setting LXDE to start for 'athenaos'..."
 sudo -u athenaos bash -c 'echo "[[ -z \$DISPLAY && \$XDG_VTNR -eq 1 ]] && exec startx" >> ~/.bash_profile'
 sudo -u athenaos bash -c 'echo "bash /home/athenaos/motd.sh" >> ~/.bashrc'
-pip3 install fastapi flaskwebgui uvicorn geopy flask fastapi  --break-system-packages
-sudo -u athenaos bash -c 'pip3 install fastapi flaskwebgui uvicorn geopy flask fastapi  --break-system-packages'
+
 chown athenaos:athenaos /home/athenaos/.bash_profile
 systemctl disable lightdm
 
@@ -96,6 +95,8 @@ chown -R athenaos:athenaos /home/athenaos/motd.sh
 
 mv /usr/bin/lxpanel /usr/bin/lxpanel_no
 cd /home/athenaos/ && git clone https://github.com/quietvw/AthenaOS_UI
+cd /home/athenaos/AthenaOS_UI && pip3 install -r requirements.txt --break-system-packages
+sudo -u athenaos bash -c 'cd /home/athenaos/AthenaOS_UI && pip3 install -r requirements.txt --break-system-packages'
 chown -R athenaos:athenaos /home/athenaos/AthenaOS_UI
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
