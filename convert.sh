@@ -88,6 +88,8 @@ chown -R athenaos:athenaos /home/athenaos/startup.sh
 cp -rf wallpaper.png /home/athenaos/wallpaper.png
 chown -R athenaos:athenaos /home/athenaos/wallpaper.png
 
+cp -rf athenaos.service /etc/systemd/system/athenaos.service
+systemctl enable athenaos
 cp -rf motd.sh /home/athenaos/motd.sh
 chmod +x /home/athenaos/motd.sh
 chown -R athenaos:athenaos /home/athenaos/motd.sh
