@@ -39,19 +39,11 @@ else
 fi
 
 # Install LXDE with no recommended packages
-echo "Installing LXDE (minimal)..."
-apt install --no-install-recommends lxde sudo git -y
+echo "Installing Desktop Enviroment (minimal)..."
+apt install --no-install-recommends openbox sudo git -y
 apt install xinit xserver-xorg plymouth -y 
 apt install python3-venv python3-pip -y
-sudo install -d -m 0755 /etc/apt/keyrings
-wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
-echo '
-Package: *
-Pin: origin packages.mozilla.org
-Pin-Priority: 1000
-' | sudo tee /etc/apt/preferences.d/mozilla
-sudo apt-get update && sudo apt-get install firefox -y
+apt install --no-install-recommends surf
 
 # Enable autologin for athenaos
 echo "Setting up autologin for 'athenaos'..."
@@ -65,24 +57,19 @@ ExecStart=-/sbin/agetty --autologin athenaos --noclear %I \$TERM
 EOF
 
 # Set LXDE to start automatically
-echo "Setting LXDE to start for 'athenaos'..."
+echo "Setting Openbox to start for 'athenaos'..."
 sudo -u athenaos bash -c 'echo "[[ -z \$DISPLAY && \$XDG_VTNR -eq 1 ]] && exec startx" >> ~/.bash_profile'
 sudo -u athenaos bash -c 'echo "bash /home/athenaos/motd.sh" >> ~/.bashrc'
 
 chown athenaos:athenaos /home/athenaos/.bash_profile
-systemctl disable lightdm
 
 echo "Setting up Autoconfig"
 mkdir /home/athenaos/.config/
-mkdir /home/athenaos/.config/autostart/
-echo "[Desktop Entry]
-Type=Application
-Name=AthenaOS
-Exec=/home/athenaos/startup.sh" > /home/athenaos/.config/autostart/athenaos.desktop
+mkdir /home/athenaos/.config/openbox/
 chown -R athenaos:athenaos /home/athenaos/.config/
-cp -rf startup.sh /home/athenaos/startup.sh
-chmod +x /home/athenaos/startup.sh
-chown -R athenaos:athenaos /home/athenaos/startup.sh
+cp -rf startup.sh /home/athenaos/.config/openbox/autostart
+chmod +x /home/athenaos/.config/openbox/autostart
+chown -R athenaos:athenaos /home/athenaos/.config/openbox/autostart
 
 cp -rf wallpaper.png /home/athenaos/wallpaper.png
 chown -R athenaos:athenaos /home/athenaos/wallpaper.png
@@ -93,7 +80,6 @@ cp -rf motd.sh /home/athenaos/motd.sh
 chmod +x /home/athenaos/motd.sh
 chown -R athenaos:athenaos /home/athenaos/motd.sh
 
-mv /usr/bin/lxpanel /usr/bin/lxpanel_no
 cd /home/athenaos/ && git clone https://github.com/quietvw/AthenaOS_UI
 cd /home/athenaos/AthenaOS_UI && pip3 install -r requirements.txt --break-system-packages
 sudo -u athenaos bash -c 'cd /home/athenaos/AthenaOS_UI && pip3 install -r requirements.txt --break-system-packages'
