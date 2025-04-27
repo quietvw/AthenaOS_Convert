@@ -44,6 +44,10 @@ apt install --no-install-recommends openbox sudo git -y
 apt install xinit xserver-xorg x11-xserver-utils plymouth plymouth-themes -y 
 apt install python3-venv python3-pip -y
 apt install --no-install-recommends chromium feh
+
+echo "Install Wi-Fi Tools..."
+sudo apt -y install network-manager wpasupplicant firmware-linux-nonfree wireless-tools iw rfkill
+
 # Enable autologin for athenaos
 echo "Setting up autologin for 'athenaos'..."
 
