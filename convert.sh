@@ -131,5 +131,33 @@ sudo sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="AthenaOS"/' /etc/default/g
 # Update GRUB
 sudo update-grub
 
+echo "Starting AthenaOS login message setup..."
+
+# Backup files
+sudo cp /etc/issue /etc/issue.bak
+sudo cp /etc/motd /etc/motd.bak
+sudo cp /etc/issue.net /etc/issue.net.bak || echo "No /etc/issue.net found, skipping backup."
+
+# AthenaOS ASCII Logo
+ATHENA_ASCII="
+                       AthenaOS - Bravo
+"
+
+# Write new /etc/issue
+echo "$ATHENA_ASCII" | sudo tee /etc/issue > /dev/null
+echo -e "\\n\\l" | sudo tee -a /etc/issue > /dev/null
+
+# Write new /etc/motd
+echo "$ATHENA_ASCII" | sudo tee /etc/motd > /dev/null
+
+# Write new /etc/issue.net for SSH
+echo "$ATHENA_ASCII" | sudo tee /etc/issue.net > /dev/null
+
+# Disable dynamic motd scripts (optional)
+if [ -d "/etc/update-motd.d/" ]; then
+  echo "Disabling dynamic motd scripts..."
+  sudo chmod -x /etc/update-motd.d/*
+fi
+
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
 reboot
