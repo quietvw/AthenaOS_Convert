@@ -12,4 +12,4 @@ xrandr --output $DISP --mode $MODERES
 feh --bg-scale "/home/athenaos/wallpaper.png" &
 
 
-firefox --kiosk http://127.0.0.1:15500
+surf -F http://127.0.0.1:15500
