@@ -43,7 +43,7 @@ echo "Installing Desktop Enviroment (minimal)..."
 apt install --no-install-recommends openbox sudo git -y
 apt install xinit xserver-xorg plymouth -y 
 apt install python3-venv python3-pip -y
-apt install --no-install-recommends surf
+apt install --no-install-recommends surf feh
 
 # Enable autologin for athenaos
 echo "Setting up autologin for 'athenaos'..."
