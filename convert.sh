@@ -99,5 +99,37 @@ cd /home/athenaos/AthenaOS_UI && pip3 install -r requirements.txt --break-system
 sudo -u athenaos bash -c 'cd /home/athenaos/AthenaOS_UI && pip3 install -r requirements.txt --break-system-packages'
 chown -R athenaos:athenaos /home/athenaos/AthenaOS_UI
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+# Backup existing files
+sudo cp /etc/os-release /etc/os-release.bak
+sudo cp /etc/lsb-release /etc/lsb-release.bak || echo "No /etc/lsb-release found, skipping backup."
+sudo cp /etc/default/grub /etc/default/grub.bak
+
+# Update /etc/os-release
+sudo tee /etc/os-release > /dev/null <<EOL
+PRETTY_NAME="AthenaOS (Bravo)"
+NAME="AthenaOS"
+VERSION_ID="1.0"
+VERSION="1.0 (Bravo)"
+ID=athenaos
+HOME_URL="https://www.adaclare.com"
+SUPPORT_URL="https://www.adaclare.com"
+BUG_REPORT_URL="https://www.adaclare.com"
+EOL
+
+# Update /etc/lsb-release
+sudo tee /etc/lsb-release > /dev/null <<EOL
+DISTRIB_ID=AthenaOS
+DISTRIB_RELEASE=1.0
+DISTRIB_CODENAME=bravo
+DISTRIB_DESCRIPTION="AthenaOS 1.0 (Bravo)"
+EOL
+
+# Update GRUB menu
+sudo sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="AthenaOS"/' /etc/default/grub || echo 'GRUB_DISTRIBUTOR="AthenaOS"' | sudo tee -a /etc/default/grub
+
+# Update GRUB
+sudo update-grub
+
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
 reboot
