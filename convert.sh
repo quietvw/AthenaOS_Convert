@@ -148,5 +148,50 @@ if [ -d "/etc/update-motd.d/" ]; then
   sudo chmod -x /etc/update-motd.d/*
 fi
 
+#!/bin/bash
+
+# AthenaOS Plymouth Theme Setup Script
+
+set -e
+
+THEME_NAME="athenaos_boot"
+THEME_DIR="/usr/share/plymouth/themes/$THEME_NAME"
+
+echo ">>> Installing AthenaOS Plymouth theme..."
+
+# Copy theme (assuming the script and theme folder are in the same location)
+sudo cp -r "$THEME_NAME" "$THEME_DIR"
+
+# Set the new theme
+echo ">>> Setting Plymouth theme to '$THEME_NAME'..."
+sudo plymouth-set-default-theme -R "$THEME_NAME"
+
+# Fix GRUB config to enable splash screen
+echo ">>> Updating GRUB configuration..."
+
+# Backup original GRUB config
+sudo cp /etc/default/grub /etc/default/grub.bak
+
+# Enable splash
+sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*/& splash/' /etc/default/grub
+
+# Optional: Reduce verbosity
+sudo sed -i 's/quiet splash/quiet splash/' /etc/default/grub
+
+# Update GRUB
+if [ -f /boot/grub/grub.cfg ]; then
+    echo ">>> Updating GRUB bootloader..."
+    sudo update-grub
+elif [ -f /boot/efi/EFI/*/grub.cfg ]; then
+    echo ">>> Detected EFI system, updating GRUB bootloader..."
+    sudo grub-mkconfig -o /boot/efi/EFI/*/grub.cfg
+else
+    echo ">>> Warning: GRUB config file not found, please update manually!"
+fi
+
+# Rebuild initramfs
+sudo update-initramfs -u
+
+
 echo "Setup complete. Hostname is now AthenaOS. Reboot to log in as 'athenaos' with LXDE."
 reboot
