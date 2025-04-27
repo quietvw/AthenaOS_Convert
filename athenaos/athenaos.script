@@ -1,0 +1,32 @@
+// Set background color (dark blueish tone)
+Window.SetBackgroundTopColor(0.05, 0.05, 0.08); // Top gradient
+Window.SetBackgroundBottomColor(0.02, 0.02, 0.05); // Bottom gradient
+
+// Load logo
+logo = Image("logo.png");
+logo.SetX(Window.GetWidth() / 2 - logo.GetWidth() / 2);
+logo.SetY(Window.GetHeight() / 2 - logo.GetHeight() / 2 - 30);
+logo.Show();
+
+// Loading animation: blinking dots
+fun loading_dots()
+{
+    text = Text("");
+    text.SetX(Window.GetWidth() / 2 - 10);
+    text.SetY(Window.GetHeight() / 2 + 100);
+    text.SetColor(1.0, 1.0, 1.0); // White text
+
+    numDots = 0;
+
+    while (1) {
+        dots = "";
+        for (i = 0; i < numDots; i++) {
+            dots += ".";
+        }
+        text.SetText(dots);
+        numDots = (numDots + 1) % 4;
+        Sleep(0.5);
+    }
+}
+
+loading_dots();

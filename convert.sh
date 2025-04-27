@@ -148,13 +148,7 @@ if [ -d "/etc/update-motd.d/" ]; then
   sudo chmod -x /etc/update-motd.d/*
 fi
 
-#!/bin/bash
-
-# AthenaOS Plymouth Theme Setup Script
-
-set -e
-
-THEME_NAME="athenaos_boot"
+THEME_NAME="athenaos"
 THEME_DIR="/usr/share/plymouth/themes/$THEME_NAME"
 
 echo ">>> Installing AthenaOS Plymouth theme..."

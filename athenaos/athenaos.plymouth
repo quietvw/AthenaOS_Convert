@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=AthenaOS
+Description=Bootscreen for AthenaOS (Dark Theme)
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/athenaos
+ScriptFile=/usr/share/plymouth/themes/athenaos/athenaos.script
