@@ -12,4 +12,4 @@ xrandr --output $DISP --mode $MODERES
 feh --bg-scale "/home/athenaos/wallpaper.png" &
 
 
-surf -F http://127.0.0.1:15500
+chromium --noerrdialogs --disable-infobars --kiosk http://127.0.0.1:15500 &
