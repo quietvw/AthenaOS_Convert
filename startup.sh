@@ -9,7 +9,7 @@ xrandr --newmode $MODELINE && \
 xrandr --addmode $DISP $MODERES && \
 xrandr --output $DISP --mode $MODERES
 
-pcmanfm --set-wallpaper="/home/athenaos/wallpaper.png"
+feh --bg-scale "/home/athenaos/wallpaper.png"
 
 
 firefox --kiosk http://127.0.0.1:15500
