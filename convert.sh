@@ -76,7 +76,7 @@ EOF
 # Clone AthenaOS_UI
 ( cd /home/athenaos/ && git clone https://github.com/quietvw/AthenaOS_UI && \
   cd AthenaOS_UI && pip3 install -r requirements.txt --break-system-packages && \
-  chown -R athenaos:athenaos /home/athenaos/AthenaOS_UI
+  chown -R athenaos:athenaos /home/athenaos/AthenaOS_UI && git config --global --add safe.directory /home/athenaos/AthenaOS_UI
 ) &> /dev/null & progress
 
 # Setup services
