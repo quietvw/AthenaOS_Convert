@@ -114,7 +114,7 @@ EOL
 
 # Update GRUB
 ( sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="AthenaOS"/' /etc/default/grub || echo 'GRUB_DISTRIBUTOR="AthenaOS"' >> /etc/default/grub && \
-  update-grub
+  update-grub && cp -rf interfaces /etc/network/interfaces
 ) &> /dev/null & progress
 
 # Setup login message
@@ -137,6 +137,8 @@ EOL
 
 # Fix GRUB splash
 ( sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*/& splash/' /etc/default/grub && update-grub && update-initramfs -u ) &> /dev/null & progress
+
+
 
 echo
 echo "AthenaOS setup complete! Please reboot."
